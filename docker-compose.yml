@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  react:
+    container_name: react_app
+    build:
+      context: ./
+      dockerfile: dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    # environment:
+    # - NODE_ENV=development
+    # - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    # command: ["npm", "start"]
+  test:
+    container_name: test_app
+    build:
+      context: ./
+      dockerfile: dockerfile.dev
+    volumes:
+      - /usr/src/app/node_modules
+      - ./:/usr/src/app
+    # environment:
+    #   - NODE_ENV=development
+    #   - CHOKIDAR_USEPOLLING=true
+    command: ["npm", "run", "test"]
